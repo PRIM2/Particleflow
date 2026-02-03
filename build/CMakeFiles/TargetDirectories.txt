@@ -1,0 +1,3 @@
+/home/ferrangb/Desktop/TFG/sim/pgun/build/CMakeFiles/pgun.dir
+/home/ferrangb/Desktop/TFG/sim/pgun/build/CMakeFiles/edit_cache.dir
+/home/ferrangb/Desktop/TFG/sim/pgun/build/CMakeFiles/rebuild_cache.dir

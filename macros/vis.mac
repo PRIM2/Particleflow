@@ -1,0 +1,57 @@
+/control/verbose 2
+/run/verbose 1
+/event/verbose 0
+/tracking/verbose 0
+
+/run/initialize
+
+# /vis/open OGLSX 1000x800-0+0
+/vis/open OGLSX 960x1080-0+0
+
+/vis/verbose warnings
+
+# Escena
+/vis/scene/create
+/vis/scene/add/volume
+/vis/scene/add/axes 0 0 0 1 m
+/vis/scene/add/axes 0 0 0 50 cm
+
+
+# Vista (sin autoRefresh al principio)
+/vis/viewer/set/style wireframe
+/vis/viewer/set/viewpointThetaPhi 80 15
+/vis/viewer/zoom 1.3
+
+# Dibuja y deja la escena lista
+/vis/drawVolume
+/vis/viewer/rebuild
+/vis/viewer/flush
+
+# Ahora sí: refresco automático
+/vis/viewer/set/autoRefresh true
+
+# (Opcional) Tracks de 1 evento para comprobar que también se quedan
+/vis/scene/add/trajectories smooth
+/vis/scene/endOfEventAction accumulate 1
+# /run/beamOn 1
+/vis/viewer/flush
+
+
+# Trayectorias ON
+/tracking/storeTrajectory 1
+/vis/scene/add/trajectories smooth
+
+# Colorear por tipo de partícula (ParticleID)
+/vis/modeling/trajectories/create/drawByParticleID
+
+# # Asignaciones típicas (ajústalas a gusto)
+# /vis/modeling/trajectories/drawByParticleID-0/set e- green
+# /vis/modeling/trajectories/drawByParticleID-0/set e+ cyan
+# /vis/modeling/trajectories/drawByParticleID-0/set gamma yellow
+# /vis/modeling/trajectories/drawByParticleID-0/set mu- red
+# /vis/modeling/trajectories/drawByParticleID-0/set mu+ magenta
+# /vis/modeling/trajectories/drawByParticleID-0/set proton blue
+# /vis/modeling/trajectories/drawByParticleID-0/set neutron gray
+
+# (Opcional) dibujar puntos de paso para entender dónde interactúa
+# /vis/modeling/trajectories/drawByParticleID-0/default/setDrawStepPts true

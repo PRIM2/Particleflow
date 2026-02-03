@@ -1,0 +1,228 @@
+########################################################################
+# LIBRERÍA DE COMANDOS ÚTILES (.mac) PARA GEANT4
+# Copia bloques según necesidad. Los comentarios explican uso/efecto.
+########################################################################
+
+
+############################
+# A) CONTROL DEL SISTEMA UI
+############################
+
+# Ejecuta otro macro desde este macro (modularidad, reutilización)
+/control/execute otro_macro.mac
+
+# Ajusta cuánta info imprime el sistema de control (útil al depurar macros)
+/control/verbose 1
+
+
+########################
+# B) VERBOSIDAD (LOGS)
+########################
+
+# Verbosidad del "run": inicio/fin de run, resumen, etc.
+/run/verbose 1
+
+# Verbosidad por evento: si subes a 1 o más, imprime info por evento (ruidoso)
+/event/verbose 0
+
+# Verbosidad del tracking: si subes, imprime info por step/track (muy ruidoso)
+/tracking/verbose 0
+
+# (Opcional) Verbosidad de procesos de física (si tu build lo soporta, puede ser útil)
+/process/verbose 0
+
+
+##############################
+# C) INICIALIZACIÓN Y EJECUCIÓN
+##############################
+
+# Inicializa geometría + física + tablas. Se debe llamar antes de beamOn.
+/run/initialize
+
+# Lanza N eventos (el "run" real). Esto hace el transporte y genera secundarios.
+/run/beamOn 10
+
+# Reinicializa geometría si la has cambiado (solo si tu app lo permite en runtime)
+/run/reinitializeGeometry
+
+# Reinicializa la física si la has cambiado (raro; normalmente no se toca en runtime)
+/run/reinitializePhysics
+
+
+#####################################
+# D) COMPROBACIÓN DE GEOMETRÍA / INFO
+#####################################
+
+# Muestra lista de colores disponibles para /vis (útil para atributos)
+/vis/list
+
+# Lista viewers activos (para saber si realmente abriste un visor)
+/vis/viewer/list
+
+# Lista escenas y su contenido (para saber qué has añadido a la escena)
+/vis/scene/list
+
+# Lista comandos /vis disponibles (para descubrir opciones)
+/vis/verbose 2
+
+
+############################
+# E) VISUALIZACIÓN: APERTURA
+############################
+
+# Abre un visor OpenGL almacenado con tamaño/posición (X11/XWayland)
+/vis/open OGLSX 1000x800+100+100
+
+# Abre un visor OpenGL inmediato (a veces funciona donde OGLSX falla)
+/vis/open OGLIX 1000x800+100+100
+
+# Crea una escena nueva (recomendable si vienes de una sesión “sucia”)
+/vis/scene/create
+
+# Añade la geometría (volúmenes) a la escena. Sin esto no verás el detector.
+/vis/scene/add/volume
+
+# Dibuja los volúmenes de la escena en el visor
+/vis/drawVolume
+
+# Fuerza reconstrucción del viewer (útil si “parpadea” o no aparece nada)
+/vis/viewer/rebuild
+
+# Fuerza a renderizar (útil tras cambios si no se refresca solo)
+/vis/viewer/flush
+
+# Activa refresco automático del visor (cómodo; a veces da parpadeos)
+/vis/viewer/set/autoRefresh true
+
+
+#################################
+# F) VISUALIZACIÓN: VISTA Y CÁMARA
+#################################
+
+# Pone el estilo en “alambre” (wireframe): mejor para ver interior y overlaps
+/vis/viewer/set/style wireframe
+
+# Pone el estilo en “superficie” (surface): mejor para ver formas sólidas
+/vis/viewer/set/style surface
+
+# Ajusta orientación de cámara por ángulos (Theta, Phi) en grados
+/vis/viewer/set/viewpointThetaPhi 70 20
+
+# Zoom (mayor = más cerca). Si no ves nada, juega con este valor.
+/vis/viewer/zoom 1.3
+
+# Añade ejes en el origen con longitud (útil para orientarte en escala)
+/vis/scene/add/axes 0 0 0 50 cm
+
+# Cambia el fondo (RGBA). Ejemplo: negro con alpha 1
+/vis/viewer/set/background 0 0 0 1
+
+# Si el objeto está “lejos” o perdido, esto suele ayudar (rebuild+flush tras)
+/vis/viewer/zoomTo 1
+/vis/viewer/rebuild
+/vis/viewer/flush
+
+
+########################################
+# G) VISUALIZACIÓN: TRAYECTORIAS (TRACKS)
+########################################
+
+# Activa dibujo de trayectorias “suaves”
+/vis/scene/add/trajectories smooth
+
+# Modelo de trayectorias por carga (colorea por signo de carga)
+# (En tu log ya apareció como fallback; este comando lo hace explícito)
+/vis/modeling/trajectories/create/drawByCharge
+
+# Indica qué hacer al final de cada evento:
+# - refresh: muestra solo el último evento
+# - accumulate N: acumula hasta N eventos en memoria para ver varios
+/vis/scene/endOfEventAction refresh
+# /vis/scene/endOfEventAction accumulate 10
+
+# Si acumulas, puedes revisar los eventos guardados uno a uno
+/vis/reviewKeptEvents
+
+# Si acumulas y no ves acumulado, habilita y fuerza flush
+/vis/enable
+/vis/viewer/flush
+
+
+#######################################
+# H) EXPORTACIÓN A FICHERO (SIN OpenGL)
+#######################################
+
+# Abre driver DAWNFILE para exportar geometría a .prim (render externo con DAWN)
+/vis/open DAWNFILE
+
+# (Repetición intencional) Crea escena y añade volumen para exportar
+/vis/scene/create
+/vis/scene/add/volume
+/vis/drawVolume
+
+# Fuerza escritura del fichero .prim al disco
+/vis/viewer/flush
+
+# Abre driver VRML2FILE para exportar a .wrl (visualización externa)
+/vis/open VRML2FILE
+/vis/scene/create
+/vis/scene/add/volume
+/vis/drawVolume
+/vis/viewer/flush
+
+
+###########################################
+# I) CORTES / REGIÓN (OJO: afecta a física)
+###########################################
+
+# Define un cut global (longitud). Afecta producción de secundarios EM.
+# Úsalo con cuidado: cambia resultados y rendimiento.
+/run/setCut 0.7 mm
+
+# Si quieres diferentes cuts por región, eso ya suele requerir C++ (Regions)
+
+
+########################################
+# J) RANDOM SEED (REPRODUCIBILIDAD)
+########################################
+
+# Fija semilla. Útil para repetir exactamente un run.
+# Nota: algunos setups MT requieren control adicional.
+/random/setSeeds 12345 67890
+
+
+########################################
+# K) PLANTILLAS COMPLETAS (COPIAR TAL CUAL)
+########################################
+
+# --- Plantilla: ver geometría rápido (sin eventos) ---
+/run/initialize
+/vis/open OGLSX 1000x800+100+100
+/vis/scene/create
+/vis/scene/add/volume
+/vis/viewer/set/style wireframe
+/vis/scene/add/axes 0 0 0 50 cm
+/vis/drawVolume
+/vis/viewer/flush
+
+# --- Plantilla: ver tracks de 1 evento ---
+/run/initialize
+/vis/open OGLSX 1000x800+100+100
+/vis/scene/create
+/vis/scene/add/volume
+/vis/scene/add/trajectories smooth
+/vis/scene/endOfEventAction accumulate 1
+/vis/drawVolume
+/run/beamOn 1
+/vis/viewer/flush
+
+# --- Plantilla: batch puro (sin vis) ---
+/run/verbose 1
+/event/verbose 0
+/tracking/verbose 0
+/run/initialize
+/run/beamOn 10000
+
+########################################################################
+# FIN
+########################################################################

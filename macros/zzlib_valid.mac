@@ -1,0 +1,183 @@
+########################################################################
+# LIBRERÍA DE VALIDACIÓN (GEANT4 .mac)
+# Objetivo: detectar rápido si estás simulando lo que crees:
+# - geometría realmente construida (no solo World)
+# - materiales asignados
+# - solapes/colocaciones absurdas
+# - fuente primaria (cuando es controlable por UI)
+# - evidencias reproducibles (export de geometría)
+#
+# Nota crítica: muchas comprobaciones “serias” (lista de volúmenes+materiales,
+# energía depositada, transmisión, etc.) requieren C++ (prints o scoring).
+# Aquí te dejo todo lo que SÍ puedes hacer desde macros y cómo usarlo.
+########################################################################
+
+
+############################
+# 0) MODO DIAGNÓSTICO “LOG”
+############################
+
+# Aumenta la verbosidad del sistema de control para ver si algún comando falla
+/control/verbose 2
+
+# Verbosidad básica del run (te confirma initialize/beamOn)
+/run/verbose 1
+
+# Mantén event/tracking en 0 para no inundarte (sube tracking si buscas algo)
+/event/verbose 0
+/tracking/verbose 0
+
+
+##############################################
+# 1) VALIDACIÓN MÍNIMA: ¿SE INICIALIZA BIEN?
+##############################################
+
+# Inicializa (si aquí peta, no sigas)
+/run/initialize
+
+
+########################################################
+# 2) VALIDACIÓN DE GEOMETRÍA (VISUAL + EXPORT A FICHERO)
+########################################################
+
+# --- A) VISUAL: comprobar que EXISTE “algo más” que el World ---
+
+# Abre visor OpenGLX (si tu entorno lo soporta)
+/vis/open OGLSX 1000x800+100+100
+
+# Crea escena y añade el árbol de volúmenes
+/vis/scene/create
+/vis/scene/add/volume
+
+# Dibuja y fuerza render
+/vis/viewer/set/style wireframe
+/vis/scene/add/axes 0 0 0 50 cm
+/vis/drawVolume
+/vis/viewer/rebuild
+/vis/viewer/flush
+
+# Cámara “razonable” para que no parezca vacío
+/vis/viewer/set/viewpointThetaPhi 70 20
+/vis/viewer/zoom 1.2
+/vis/viewer/flush
+
+# CAMBIO RÁPIDO: superficie (si wireframe confunde)
+/vis/viewer/set/style surface
+/vis/viewer/flush
+
+# Si solo ves una caja gigante (World) y nada dentro: tu DetectorConstruction falla.
+
+
+# --- B) EXPORT: evidencia reproducible sin depender de OpenGL ---
+
+# Exporta geometría a .prim (DAWN) para inspección externa
+/vis/open DAWNFILE
+/vis/scene/create
+/vis/scene/add/volume
+/vis/drawVolume
+/vis/viewer/flush
+# Resultado esperado: un .prim que debería contener PVName de World y también del bloque/detector.
+# Si luego haces: grep "PVName" y solo sale World:0 -> tu geometría está vacía.
+
+# Alternativa export VRML (útil si quieres abrir en otros visores)
+/vis/open VRML2FILE
+/vis/scene/create
+/vis/scene/add/volume
+/vis/drawVolume
+/vis/viewer/flush
+
+
+#########################################################
+# 3) VALIDACIÓN DE TRACKS: ¿HAY PRIMARIOS Y SE MUEVEN?
+#########################################################
+
+# Activa trayectorias (para “ver” que se están generando primarios)
+/vis/open OGLSX 1000x800+100+100
+/vis/scene/create
+/vis/scene/add/volume
+/vis/scene/add/trajectories smooth
+
+# Al final de evento, acumula 1 (si acumulas más, ojo con memoria)
+/vis/scene/endOfEventAction accumulate 1
+
+# Dibuja volúmenes y corre 1 evento
+/vis/drawVolume
+/run/beamOn 1
+/vis/viewer/flush
+
+# Si no ves ninguna trayectoria:
+# - o estás fuera de cámara/escala
+# - o la trayectoria está desactivada por modelo
+# - o no se está generando primario (raro si tu PrimaryGeneratorAction funciona)
+
+
+#############################################################
+# 4) VALIDACIÓN DE LA FUENTE (SOLO SI ES CONTROLABLE POR UI)
+#############################################################
+
+# IMPORTANTE:
+# Esto solo funciona si tu aplicación expone el gun por comandos /gun/.
+# Con tu PrimaryGeneratorAction actual, a veces el UI puede cambiarlo, a veces no.
+
+# Lista comandos disponibles (para ver si existe /gun/ en tu build)
+/help
+
+# Si /gun existe, define explícitamente (ejemplo):
+# /gun/particle mu-
+# /gun/energy 20 GeV
+# /gun/position 0 0 -10 cm
+# /gun/direction 0 0 1
+
+# Si NO existe /gun (o no hace efecto), la fuente la manda el C++ y no hay validación por macro.
+
+
+#############################################################
+# 5) REPRODUCIBILIDAD: SEMILLAS (PARA REPETIR RESULTADOS)
+#############################################################
+
+# Fija semillas: te permite repetir exactamente (ojo con MT)
+/random/setSeeds 12345 67890
+
+
+#############################################################
+# 6) VALIDACIÓN “DE SALUD” DE RENDIMIENTO (NO FÍSICA)
+#############################################################
+
+# Corre pocos eventos para ver que no se cuelga
+/run/beamOn 10
+
+# Sube a 1000 para comprobar estabilidad (sin vis)
+/run/beamOn 1000
+
+
+#############################################################
+# 7) VALIDACIÓN DE “HAY INTERACCIÓN” (MUY BÁSICA)
+#############################################################
+
+# Si tienes un bloque denso y un primario cargado, deberías notar:
+# - dispersión múltiple (pequeña para muones a 20 GeV)
+# - producción de delta rays (a veces visible)
+#
+# Visualmente esto NO valida física, pero detecta errores gordos.
+#
+# Para neutrones/kaones la vis no es una validación: necesitas scoring.
+
+# Activa tracking verbose solo para 1 evento (ojo: imprime muchísimo)
+/tracking/verbose 1
+/run/beamOn 1
+/tracking/verbose 0
+
+
+########################################################################
+# 8) CHECKLIST: QUÉ EVIDENCIAS DEBERÍAS CONSEGUIR CON ESTA LIBRERÍA
+########################################################################
+# (1) Visor: ver al menos dos volúmenes (World + bloque) -> si no, geometría mal
+# (2) Export DAWN: dd.prim con PVName de World y del bloque -> si no, geometría mal
+# (3) Tracks: ver trayectoria del primario atravesando -> si no, fuente/cámara/vis mal
+#
+# Lo que NO te da esto:
+# - energía depositada
+# - transmisión cuantitativa
+# - espectros
+# Para eso necesitas C++ (SensitiveDetector/SteppingAction + salida a fichero).
+########################################################################

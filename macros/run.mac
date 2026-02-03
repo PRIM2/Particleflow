@@ -1,0 +1,10 @@
+# --- Verbosidad ---
+/run/verbose 1
+/event/verbose 0
+/tracking/verbose 0
+
+# --- Inicialización ---
+/run/initialize
+
+# --- Ejecutar ---
+/run/beamOn 2
