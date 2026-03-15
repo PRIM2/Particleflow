@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ferrangb/Desktop/TFG/sim/pgun
+CMAKE_SOURCE_DIR = /home/ferrangb/Desktop/rpc-simulation-geant4
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ferrangb/Desktop/TFG/sim/pgun/build
+CMAKE_BINARY_DIR = /home/ferrangb/Desktop/rpc-simulation-geant4/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/pgun.dir/depend.make
@@ -70,88 +70,88 @@ include CMakeFiles/pgun.dir/progress.make
 include CMakeFiles/pgun.dir/flags.make
 
 CMakeFiles/pgun.dir/src/main.cc.o: CMakeFiles/pgun.dir/flags.make
-CMakeFiles/pgun.dir/src/main.cc.o: /home/ferrangb/Desktop/TFG/sim/pgun/src/main.cc
+CMakeFiles/pgun.dir/src/main.cc.o: /home/ferrangb/Desktop/rpc-simulation-geant4/src/main.cc
 CMakeFiles/pgun.dir/src/main.cc.o: CMakeFiles/pgun.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ferrangb/Desktop/TFG/sim/pgun/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/pgun.dir/src/main.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pgun.dir/src/main.cc.o -MF CMakeFiles/pgun.dir/src/main.cc.o.d -o CMakeFiles/pgun.dir/src/main.cc.o -c /home/ferrangb/Desktop/TFG/sim/pgun/src/main.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ferrangb/Desktop/rpc-simulation-geant4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/pgun.dir/src/main.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pgun.dir/src/main.cc.o -MF CMakeFiles/pgun.dir/src/main.cc.o.d -o CMakeFiles/pgun.dir/src/main.cc.o -c /home/ferrangb/Desktop/rpc-simulation-geant4/src/main.cc
 
 CMakeFiles/pgun.dir/src/main.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pgun.dir/src/main.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ferrangb/Desktop/TFG/sim/pgun/src/main.cc > CMakeFiles/pgun.dir/src/main.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ferrangb/Desktop/rpc-simulation-geant4/src/main.cc > CMakeFiles/pgun.dir/src/main.cc.i
 
 CMakeFiles/pgun.dir/src/main.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pgun.dir/src/main.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ferrangb/Desktop/TFG/sim/pgun/src/main.cc -o CMakeFiles/pgun.dir/src/main.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ferrangb/Desktop/rpc-simulation-geant4/src/main.cc -o CMakeFiles/pgun.dir/src/main.cc.s
 
 CMakeFiles/pgun.dir/src/ActionInitialization.cc.o: CMakeFiles/pgun.dir/flags.make
-CMakeFiles/pgun.dir/src/ActionInitialization.cc.o: /home/ferrangb/Desktop/TFG/sim/pgun/src/ActionInitialization.cc
+CMakeFiles/pgun.dir/src/ActionInitialization.cc.o: /home/ferrangb/Desktop/rpc-simulation-geant4/src/ActionInitialization.cc
 CMakeFiles/pgun.dir/src/ActionInitialization.cc.o: CMakeFiles/pgun.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ferrangb/Desktop/TFG/sim/pgun/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/pgun.dir/src/ActionInitialization.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pgun.dir/src/ActionInitialization.cc.o -MF CMakeFiles/pgun.dir/src/ActionInitialization.cc.o.d -o CMakeFiles/pgun.dir/src/ActionInitialization.cc.o -c /home/ferrangb/Desktop/TFG/sim/pgun/src/ActionInitialization.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ferrangb/Desktop/rpc-simulation-geant4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/pgun.dir/src/ActionInitialization.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pgun.dir/src/ActionInitialization.cc.o -MF CMakeFiles/pgun.dir/src/ActionInitialization.cc.o.d -o CMakeFiles/pgun.dir/src/ActionInitialization.cc.o -c /home/ferrangb/Desktop/rpc-simulation-geant4/src/ActionInitialization.cc
 
 CMakeFiles/pgun.dir/src/ActionInitialization.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pgun.dir/src/ActionInitialization.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ferrangb/Desktop/TFG/sim/pgun/src/ActionInitialization.cc > CMakeFiles/pgun.dir/src/ActionInitialization.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ferrangb/Desktop/rpc-simulation-geant4/src/ActionInitialization.cc > CMakeFiles/pgun.dir/src/ActionInitialization.cc.i
 
 CMakeFiles/pgun.dir/src/ActionInitialization.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pgun.dir/src/ActionInitialization.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ferrangb/Desktop/TFG/sim/pgun/src/ActionInitialization.cc -o CMakeFiles/pgun.dir/src/ActionInitialization.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ferrangb/Desktop/rpc-simulation-geant4/src/ActionInitialization.cc -o CMakeFiles/pgun.dir/src/ActionInitialization.cc.s
 
 CMakeFiles/pgun.dir/src/Messages.cc.o: CMakeFiles/pgun.dir/flags.make
-CMakeFiles/pgun.dir/src/Messages.cc.o: /home/ferrangb/Desktop/TFG/sim/pgun/src/Messages.cc
+CMakeFiles/pgun.dir/src/Messages.cc.o: /home/ferrangb/Desktop/rpc-simulation-geant4/src/Messages.cc
 CMakeFiles/pgun.dir/src/Messages.cc.o: CMakeFiles/pgun.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ferrangb/Desktop/TFG/sim/pgun/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/pgun.dir/src/Messages.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pgun.dir/src/Messages.cc.o -MF CMakeFiles/pgun.dir/src/Messages.cc.o.d -o CMakeFiles/pgun.dir/src/Messages.cc.o -c /home/ferrangb/Desktop/TFG/sim/pgun/src/Messages.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ferrangb/Desktop/rpc-simulation-geant4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/pgun.dir/src/Messages.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pgun.dir/src/Messages.cc.o -MF CMakeFiles/pgun.dir/src/Messages.cc.o.d -o CMakeFiles/pgun.dir/src/Messages.cc.o -c /home/ferrangb/Desktop/rpc-simulation-geant4/src/Messages.cc
 
 CMakeFiles/pgun.dir/src/Messages.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pgun.dir/src/Messages.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ferrangb/Desktop/TFG/sim/pgun/src/Messages.cc > CMakeFiles/pgun.dir/src/Messages.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ferrangb/Desktop/rpc-simulation-geant4/src/Messages.cc > CMakeFiles/pgun.dir/src/Messages.cc.i
 
 CMakeFiles/pgun.dir/src/Messages.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pgun.dir/src/Messages.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ferrangb/Desktop/TFG/sim/pgun/src/Messages.cc -o CMakeFiles/pgun.dir/src/Messages.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ferrangb/Desktop/rpc-simulation-geant4/src/Messages.cc -o CMakeFiles/pgun.dir/src/Messages.cc.s
 
 CMakeFiles/pgun.dir/src/DetectorConstruction.cc.o: CMakeFiles/pgun.dir/flags.make
-CMakeFiles/pgun.dir/src/DetectorConstruction.cc.o: /home/ferrangb/Desktop/TFG/sim/pgun/src/DetectorConstruction.cc
+CMakeFiles/pgun.dir/src/DetectorConstruction.cc.o: /home/ferrangb/Desktop/rpc-simulation-geant4/src/DetectorConstruction.cc
 CMakeFiles/pgun.dir/src/DetectorConstruction.cc.o: CMakeFiles/pgun.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ferrangb/Desktop/TFG/sim/pgun/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/pgun.dir/src/DetectorConstruction.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pgun.dir/src/DetectorConstruction.cc.o -MF CMakeFiles/pgun.dir/src/DetectorConstruction.cc.o.d -o CMakeFiles/pgun.dir/src/DetectorConstruction.cc.o -c /home/ferrangb/Desktop/TFG/sim/pgun/src/DetectorConstruction.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ferrangb/Desktop/rpc-simulation-geant4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/pgun.dir/src/DetectorConstruction.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pgun.dir/src/DetectorConstruction.cc.o -MF CMakeFiles/pgun.dir/src/DetectorConstruction.cc.o.d -o CMakeFiles/pgun.dir/src/DetectorConstruction.cc.o -c /home/ferrangb/Desktop/rpc-simulation-geant4/src/DetectorConstruction.cc
 
 CMakeFiles/pgun.dir/src/DetectorConstruction.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pgun.dir/src/DetectorConstruction.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ferrangb/Desktop/TFG/sim/pgun/src/DetectorConstruction.cc > CMakeFiles/pgun.dir/src/DetectorConstruction.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ferrangb/Desktop/rpc-simulation-geant4/src/DetectorConstruction.cc > CMakeFiles/pgun.dir/src/DetectorConstruction.cc.i
 
 CMakeFiles/pgun.dir/src/DetectorConstruction.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pgun.dir/src/DetectorConstruction.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ferrangb/Desktop/TFG/sim/pgun/src/DetectorConstruction.cc -o CMakeFiles/pgun.dir/src/DetectorConstruction.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ferrangb/Desktop/rpc-simulation-geant4/src/DetectorConstruction.cc -o CMakeFiles/pgun.dir/src/DetectorConstruction.cc.s
 
 CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.o: CMakeFiles/pgun.dir/flags.make
-CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.o: /home/ferrangb/Desktop/TFG/sim/pgun/src/PrimaryGeneratorAction.cc
+CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.o: /home/ferrangb/Desktop/rpc-simulation-geant4/src/PrimaryGeneratorAction.cc
 CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.o: CMakeFiles/pgun.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ferrangb/Desktop/TFG/sim/pgun/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.o -MF CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.o.d -o CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.o -c /home/ferrangb/Desktop/TFG/sim/pgun/src/PrimaryGeneratorAction.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ferrangb/Desktop/rpc-simulation-geant4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.o -MF CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.o.d -o CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.o -c /home/ferrangb/Desktop/rpc-simulation-geant4/src/PrimaryGeneratorAction.cc
 
 CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ferrangb/Desktop/TFG/sim/pgun/src/PrimaryGeneratorAction.cc > CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ferrangb/Desktop/rpc-simulation-geant4/src/PrimaryGeneratorAction.cc > CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.i
 
 CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ferrangb/Desktop/TFG/sim/pgun/src/PrimaryGeneratorAction.cc -o CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ferrangb/Desktop/rpc-simulation-geant4/src/PrimaryGeneratorAction.cc -o CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.s
 
 CMakeFiles/pgun.dir/src/GasSD.cc.o: CMakeFiles/pgun.dir/flags.make
-CMakeFiles/pgun.dir/src/GasSD.cc.o: /home/ferrangb/Desktop/TFG/sim/pgun/src/GasSD.cc
+CMakeFiles/pgun.dir/src/GasSD.cc.o: /home/ferrangb/Desktop/rpc-simulation-geant4/src/GasSD.cc
 CMakeFiles/pgun.dir/src/GasSD.cc.o: CMakeFiles/pgun.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ferrangb/Desktop/TFG/sim/pgun/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/pgun.dir/src/GasSD.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pgun.dir/src/GasSD.cc.o -MF CMakeFiles/pgun.dir/src/GasSD.cc.o.d -o CMakeFiles/pgun.dir/src/GasSD.cc.o -c /home/ferrangb/Desktop/TFG/sim/pgun/src/GasSD.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ferrangb/Desktop/rpc-simulation-geant4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/pgun.dir/src/GasSD.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/pgun.dir/src/GasSD.cc.o -MF CMakeFiles/pgun.dir/src/GasSD.cc.o.d -o CMakeFiles/pgun.dir/src/GasSD.cc.o -c /home/ferrangb/Desktop/rpc-simulation-geant4/src/GasSD.cc
 
 CMakeFiles/pgun.dir/src/GasSD.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/pgun.dir/src/GasSD.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ferrangb/Desktop/TFG/sim/pgun/src/GasSD.cc > CMakeFiles/pgun.dir/src/GasSD.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ferrangb/Desktop/rpc-simulation-geant4/src/GasSD.cc > CMakeFiles/pgun.dir/src/GasSD.cc.i
 
 CMakeFiles/pgun.dir/src/GasSD.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/pgun.dir/src/GasSD.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ferrangb/Desktop/TFG/sim/pgun/src/GasSD.cc -o CMakeFiles/pgun.dir/src/GasSD.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ferrangb/Desktop/rpc-simulation-geant4/src/GasSD.cc -o CMakeFiles/pgun.dir/src/GasSD.cc.s
 
 # Object files for target pgun
 pgun_OBJECTS = \
@@ -165,53 +165,53 @@ pgun_OBJECTS = \
 # External object files for target pgun
 pgun_EXTERNAL_OBJECTS =
 
-pgun: CMakeFiles/pgun.dir/src/main.cc.o
-pgun: CMakeFiles/pgun.dir/src/ActionInitialization.cc.o
-pgun: CMakeFiles/pgun.dir/src/Messages.cc.o
-pgun: CMakeFiles/pgun.dir/src/DetectorConstruction.cc.o
-pgun: CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.o
-pgun: CMakeFiles/pgun.dir/src/GasSD.cc.o
-pgun: CMakeFiles/pgun.dir/build.make
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4Tree.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4FR.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4GMocren.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4visHepRep.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4RayTracer.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4VRML.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4ToolsSG.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4OpenGL.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4vis_management.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4modeling.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4interfaces.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4mctruth.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4geomtext.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4error_propagation.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4readout.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4physicslists.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4run.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4event.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4tracking.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4parmodels.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4processes.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4digits_hits.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4track.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4particles.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4geometry.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4materials.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4graphics_reps.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4analysis.so
-pgun: /usr/lib/x86_64-linux-gnu/libexpat.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4zlib.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4intercoms.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4global.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4clhep.so
-pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4ptl.so.3.0.0
-pgun: CMakeFiles/pgun.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ferrangb/Desktop/TFG/sim/pgun/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable pgun"
+bin/pgun: CMakeFiles/pgun.dir/src/main.cc.o
+bin/pgun: CMakeFiles/pgun.dir/src/ActionInitialization.cc.o
+bin/pgun: CMakeFiles/pgun.dir/src/Messages.cc.o
+bin/pgun: CMakeFiles/pgun.dir/src/DetectorConstruction.cc.o
+bin/pgun: CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.o
+bin/pgun: CMakeFiles/pgun.dir/src/GasSD.cc.o
+bin/pgun: CMakeFiles/pgun.dir/build.make
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4Tree.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4FR.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4GMocren.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4visHepRep.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4RayTracer.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4VRML.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4ToolsSG.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4OpenGL.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4vis_management.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4modeling.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4interfaces.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4mctruth.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4geomtext.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4error_propagation.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4readout.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4physicslists.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4run.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4event.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4tracking.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4parmodels.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4processes.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4digits_hits.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4track.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4particles.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4geometry.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4materials.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4graphics_reps.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4analysis.so
+bin/pgun: /usr/lib/x86_64-linux-gnu/libexpat.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4zlib.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4intercoms.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4global.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4clhep.so
+bin/pgun: /home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/libG4ptl.so.3.0.0
+bin/pgun: CMakeFiles/pgun.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ferrangb/Desktop/rpc-simulation-geant4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable bin/pgun"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pgun.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/pgun.dir/build: pgun
+CMakeFiles/pgun.dir/build: bin/pgun
 .PHONY : CMakeFiles/pgun.dir/build
 
 CMakeFiles/pgun.dir/clean:
@@ -219,6 +219,6 @@ CMakeFiles/pgun.dir/clean:
 .PHONY : CMakeFiles/pgun.dir/clean
 
 CMakeFiles/pgun.dir/depend:
-	cd /home/ferrangb/Desktop/TFG/sim/pgun/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ferrangb/Desktop/TFG/sim/pgun /home/ferrangb/Desktop/TFG/sim/pgun /home/ferrangb/Desktop/TFG/sim/pgun/build /home/ferrangb/Desktop/TFG/sim/pgun/build /home/ferrangb/Desktop/TFG/sim/pgun/build/CMakeFiles/pgun.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/ferrangb/Desktop/rpc-simulation-geant4/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ferrangb/Desktop/rpc-simulation-geant4 /home/ferrangb/Desktop/rpc-simulation-geant4 /home/ferrangb/Desktop/rpc-simulation-geant4/build /home/ferrangb/Desktop/rpc-simulation-geant4/build /home/ferrangb/Desktop/rpc-simulation-geant4/build/CMakeFiles/pgun.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/pgun.dir/depend
 

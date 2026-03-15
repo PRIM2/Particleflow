@@ -1,93 +1,280 @@
-# rpc-simulation-geant4
+# pgun — Geant4 Particle Gun Simulation
 
+Simulation of particles traversing a shielding system (lead + concrete) and an R-134a gas detector using [Geant4](https://geant4.org/).
 
+---
 
-## Getting started
+## Quick Start
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Clean build and compile:
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-* [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.com/Primate2/rpc-simulation-geant4.git
-git branch -M main
-git push -uf origin main
+```bash
+rm -rf build
+cmake -S . -B build
+cmake --build build -j8
 ```
 
-## Integrate with your tools
+Interactive execution:
 
-* [Set up project integrations](https://gitlab.com/Primate2/rpc-simulation-geant4/-/settings/integrations)
+```bash
+./build/bin/pgun
+```
 
-## Collaborate with your team
+Batch execution with a macro:
 
-* [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+```bash
+./build/bin/pgun path/to/macro.mac
+```
 
-## Test and Deploy
+Simulation results are written to:
 
-Use the built-in continuous integration in GitLab.
+```
+build/results/
+```
 
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+---
 
-***
+## General Description
 
-# Editing this README
+The program generates three primary particles per event:
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+- neutron
+- negative muon
+- positive kaon
 
-## Suggestions for a good README
+Each particle has an energy of **20 GeV** and is fired in the **+Z direction** from `z = −19.8 m`.
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+The particles traverse the following geometry:
 
-## Name
-Choose a self-explaining name for your project.
+| Component | Dimensions | Center |
+|---|---|---|
+| Lead wall | 7 × 7 × 8 m | z = −5 m |
+| Concrete wall | 7 × 7 × 7 m | z = +11.6 m |
+| Gas detector layer 1 | 7 × 7 m, 4 cm thick | z = +18.8 m |
+| Gas detector layer 2 | 7 × 7 m, 4 cm thick | z = +19.2 m |
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+The world volume is an air box of **8 × 8 × 40 m**.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+The gas detector is instrumented with a Sensitive Detector (`GasSD`) that records simulation steps with energy deposition and writes one `.dat` file per event.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+---
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+## Physics List
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+The simulation uses the Geant4 reference physics list:
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+```
+FTFP_BERT
+```
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+This includes:
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+- Fritiof high-energy hadronic model
+- Bertini cascade for intermediate energies
+- Standard electromagnetic physics
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+---
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+## Project Structure
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+```
+pgun/
+├── CMakeLists.txt              # CMake build configuration
+├── CMakePresets.json           # CMake build presets (predefined configure/build settings)
+├── src/
+│   ├── main.cc                 # Entry point; sets RunManager, physics and UI
+│   ├── DetectorConstruction.cc # Geometry definition
+│   ├── PrimaryGeneratorAction.cc # Particle gun configuration
+│   ├── ActionInitialization.cc # User actions registration
+│   ├── GasSD.cc                # Sensitive detector implementation
+│   └── Messages.cc             # Logging utilities
+├── include/                    # Corresponding header files
+├── macros/
+│   ├── run.mac                 # Example batch macro
+│   ├── vis.mac                 # Visualization macro
+│   ├── init.mac                # Initialization macro
+│   ├── zzlib.mac               # Useful Geant4 commands
+│   └── zzlib_valid.mac         # Geometry validation macros
+├── build/                      # CMake build directory
+│   ├── bin/                    # Compiled executables
+│   └── results/                # Simulation outputs
+├── logs/                       # Optional execution logs
+├── README.md
+└── MAKE_VS_CMAKE.md
+```
 
-## License
-For open source projects, say how it is licensed.
+---
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## Requirements
+
+- Geant4 ≥ 11.x
+- CMake ≥ 3.10
+- C++17 compatible compiler (GCC or Clang)
+- Geant4 must be correctly configured in your environment (datasets, libraries, etc.)
+
+If CMake cannot find Geant4 automatically, configure it manually:
+
+```bash
+cmake -S . -B build -DGeant4_DIR=/path/to/Geant4/lib64/cmake/Geant4
+```
+
+---
+
+## Build Workflow
+
+### Clean Build
+
+```bash
+rm -rf build
+cmake -S . -B build
+cmake --build build -j8
+```
+
+### Incremental Build
+
+If the project is already configured:
+
+```bash
+cmake --build build -j8
+```
+
+---
+
+## Running the Simulation
+
+### Interactive Mode
+
+Run without arguments:
+
+```bash
+./build/bin/pgun
+```
+
+This starts the Geant4 interactive session (`Idle>`). Example commands:
+
+```
+/control/execute macros/init.mac
+/control/execute macros/vis.mac
+/run/beamOn 1
+```
+
+### Batch Mode
+
+Run using a macro file:
+
+```bash
+./build/bin/pgun macros/run.mac
+```
+
+The macro controls initialization, visualization, and number of events. Example inside a macro:
+
+```
+/run/beamOn 10
+```
+
+---
+
+## Output Data
+
+For each event, the `GasSD` sensitive detector writes a file:
+
+```
+build/results/gas_event_<eventID>.dat
+```
+
+Example:
+
+```
+build/results/gas_event_0.dat
+build/results/gas_event_1.dat
+```
+
+> This output path is independent of the directory from which the executable is launched.
+
+### Output File Format
+
+Each file contains two parts.
+
+**Event Summary**
+
+```
+# eventID  Edep_gas_total[MeV]  Nsteps_in_gas  Ntracks_in_gas
+0 0.1977342711 31 12
+```
+
+**Step-by-Step Data**
+
+```
+t0[ns],x0[mm],y0[mm],z0[mm],x1[mm],y1[mm],z1[mm],Edep[MeV],event_id,track_id,pdg,volume_name,volume_copyNo
+```
+
+Each row corresponds to a simulation step inside the gas volume with energy deposition > 0.
+
+| Field | Description |
+|---|---|
+| `t0` | Global time at the beginning of the step (ns) |
+| `x0, y0, z0` | Position at the beginning of the step (mm) |
+| `x1, y1, z1` | Position at the end of the step (mm) |
+| `Edep` | Energy deposited during the step (MeV) |
+| `event_id` | Event identifier |
+| `track_id` | Particle track identifier |
+| `pdg` | Particle PDG code |
+| `volume_name` | Detector volume name |
+| `volume_copyNo` | Copy number of the detector volume |
+
+---
+
+## Modifying the Simulation
+
+### Changing the Particle Gun
+
+Edit `src/PrimaryGeneratorAction.cc`. Parameters that can be modified:
+
+**Energy:**
+```cpp
+fGun->SetParticleEnergy(20.*GeV);
+```
+
+**Direction:**
+```cpp
+fGun->SetParticleMomentumDirection({0.,0.,1.});
+```
+
+**Initial position:**
+```cpp
+fGun->SetParticlePosition({0.,0.,-19.8*m});
+```
+
+**Particle type:**
+```cpp
+particleTable->FindParticle("mu-")
+particleTable->FindParticle("proton")
+particleTable->FindParticle("gamma")
+```
+
+### Changing the Geometry
+
+Edit `src/DetectorConstruction.cc`. Geometry components include:
+
+- world volume
+- lead wall
+- concrete wall
+- gas detector layers
+
+Materials are defined using the Geant4 NIST material database. The R-134a gas mixture (C₂H₂F₄) is defined explicitly from its elemental composition.
+
+### Changing the Number of Events
+
+Edit the macro file `macros/run.mac`:
+
+```
+/run/beamOn 100
+```
+
+You can also create your own macros to define different run configurations.
+
+---
+
+## Notes
+
+The project uses out-of-source builds, meaning all compilation artifacts remain inside `build/`. This keeps the source tree clean and allows rebuilding the entire project simply by deleting the `build/` directory.

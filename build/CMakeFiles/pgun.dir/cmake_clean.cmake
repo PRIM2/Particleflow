@@ -11,8 +11,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.o.d"
   "CMakeFiles/pgun.dir/src/main.cc.o"
   "CMakeFiles/pgun.dir/src/main.cc.o.d"
-  "pgun"
-  "pgun.pdb"
+  "bin/pgun"
+  "bin/pgun.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

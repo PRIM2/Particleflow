@@ -1,5 +1,5 @@
 CMakeFiles/pgun.dir/src/DetectorConstruction.cc.o: \
- /home/ferrangb/Desktop/TFG/sim/pgun/src/DetectorConstruction.cc \
+ /home/ferrangb/Desktop/rpc-simulation-geant4/src/DetectorConstruction.cc \
  /usr/include/stdc-predef.h \
  /home/ferrangb/Desktop/entornos/Geant4/Binarios/include/Geant4/G4NistManager.hh \
  /home/ferrangb/Desktop/entornos/Geant4/Binarios/include/Geant4/G4ICRU90StoppingData.hh \
@@ -337,7 +337,7 @@ CMakeFiles/pgun.dir/src/DetectorConstruction.cc.o: \
  /home/ferrangb/Desktop/entornos/Geant4/Binarios/include/Geant4/G4LogicalVolume.icc \
  /home/ferrangb/Desktop/entornos/Geant4/Binarios/include/Geant4/G4PVPlacement.hh \
  /home/ferrangb/Desktop/entornos/Geant4/Binarios/include/Geant4/G4SystemOfUnits.hh \
- /home/ferrangb/Desktop/TFG/sim/pgun/include/DetectorConstruction.hh \
+ /home/ferrangb/Desktop/rpc-simulation-geant4/include/DetectorConstruction.hh \
  /home/ferrangb/Desktop/entornos/Geant4/Binarios/include/Geant4/G4VUserDetectorConstruction.hh \
  /home/ferrangb/Desktop/entornos/Geant4/Binarios/include/Geant4/G4SDManager.hh \
  /home/ferrangb/Desktop/entornos/Geant4/Binarios/include/Geant4/G4HCtable.hh \
@@ -390,7 +390,7 @@ CMakeFiles/pgun.dir/src/DetectorConstruction.cc.o: \
  /home/ferrangb/Desktop/entornos/Geant4/Binarios/include/Geant4/G4VReadOutGeometry.hh \
  /home/ferrangb/Desktop/entornos/Geant4/Binarios/include/Geant4/G4SensitiveVolumeList.hh \
  /home/ferrangb/Desktop/entornos/Geant4/Binarios/include/Geant4/G4VSDFilter.hh \
- /home/ferrangb/Desktop/TFG/sim/pgun/include/GasSD.hh \
+ /home/ferrangb/Desktop/rpc-simulation-geant4/include/GasSD.hh \
  /home/ferrangb/Desktop/entornos/Geant4/Binarios/include/Geant4/G4VSensitiveDetector.hh \
  /home/ferrangb/Desktop/entornos/Geant4/Binarios/include/Geant4/G4ThreeVector.hh \
  /home/ferrangb/Desktop/entornos/Geant4/Binarios/include/Geant4/globals.hh \

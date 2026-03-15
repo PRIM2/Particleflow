@@ -1,7 +1,7 @@
 CMakeFiles/pgun.dir/src/PrimaryGeneratorAction.cc.o: \
- /home/ferrangb/Desktop/TFG/sim/pgun/src/PrimaryGeneratorAction.cc \
+ /home/ferrangb/Desktop/rpc-simulation-geant4/src/PrimaryGeneratorAction.cc \
  /usr/include/stdc-predef.h \
- /home/ferrangb/Desktop/TFG/sim/pgun/include/PrimaryGeneratorAction.hh \
+ /home/ferrangb/Desktop/rpc-simulation-geant4/include/PrimaryGeneratorAction.hh \
  /home/ferrangb/Desktop/entornos/Geant4/Binarios/include/Geant4/G4VUserPrimaryGeneratorAction.hh \
  /home/ferrangb/Desktop/entornos/Geant4/Binarios/include/Geant4/G4ParticleGun.hh \
  /home/ferrangb/Desktop/entornos/Geant4/Binarios/include/Geant4/globals.hh \

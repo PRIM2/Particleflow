@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "default",
+      "binaryDir": "build",
+      "cacheVariables": {
+        "Geant4_DIR": "/home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/cmake/Geant4"
+      }
+    }
+  ]
+}

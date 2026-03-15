@@ -10,6 +10,7 @@
 #include <fstream>
 #include <iomanip>
 #include <sstream>
+#include <filesystem> // to create /build/results directory
 
 GasSD::GasSD(const G4String& name)
   : G4VSensitiveDetector(name)
@@ -75,8 +76,11 @@ void GasSD::EndOfEvent(G4HCofThisEvent* /*hce*/)
   const G4int eventID = ev->GetEventID();
   const G4int nTracks = static_cast<G4int>(fTrackIDs.size());
 
-  std::ostringstream fname;
-  fname << "gas_event_" << eventID << ".dat";
+  // DATA LOG INSTO /build/results/...
+  std::filesystem::create_directories(std::string(BUILD_DIR) + "/results");
+  
+  std::ostringstream fname;  
+  fname << BUILD_DIR << "/results/gas_event_" << eventID << ".dat";
 
   std::ofstream out(fname.str());
   if (!out.is_open()) return;
