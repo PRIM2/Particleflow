@@ -1,3 +1,0 @@
-/home/ferrangb/Desktop/rpc-simulation-geant4/build/CMakeFiles/pgun.dir
-/home/ferrangb/Desktop/rpc-simulation-geant4/build/CMakeFiles/edit_cache.dir
-/home/ferrangb/Desktop/rpc-simulation-geant4/build/CMakeFiles/rebuild_cache.dir
