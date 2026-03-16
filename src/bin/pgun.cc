@@ -1,4 +1,4 @@
-// main.cc
+// pgun.cc
 #include "G4Version.hh"
 #include "G4ios.hh"
 
@@ -14,12 +14,13 @@
 #include "DetectorConstruction.hh"
 #include "ActionInitialization.hh"
 #include "Messages.hh"
+#include "Pythia8/Pythia.h"
 
 
 int main(int argc, char** argv) {
   // Header
   G4cout << "\nGeant4 version: " << G4Version << G4endl;	
-  G4cout << msg::OUT << " main.cc working\n" << G4endl;
+  G4cout << msg::OUT << " pgun.cc working\n" << G4endl;
   //G4cerr << msg::ERR_INI <<"This is an error" << msg::ERR_END << G4endl;
 
 

@@ -5,7 +5,9 @@
       "name": "default",
       "binaryDir": "build",
       "cacheVariables": {
-        "Geant4_DIR": "/home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/cmake/Geant4"
+        "Geant4_DIR": "/home/ferrangb/Desktop/entornos/Geant4/Binarios/lib64/cmake/Geant4",
+        "HEPMC3_CFG": "/home/ferrangb/opt/hepmc3/bin/HepMC3-config",
+        "PYTHIA8_CFG": "/home/ferrangb/Desktop/pythia8317/bin/pythia8-config"
       }
     }
   ]

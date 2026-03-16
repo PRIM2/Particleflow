@@ -82,7 +82,7 @@ pgun/
 ├── CMakeLists.txt              # CMake build configuration
 ├── CMakePresets.json           # CMake build presets (predefined configure/build settings)
 ├── src/
-│   ├── main.cc                 # Entry point; sets RunManager, physics and UI
+│   ├── pgun.cc                 # Entry point; sets RunManager, physics and UI
 │   ├── DetectorConstruction.cc # Geometry definition
 │   ├── PrimaryGeneratorAction.cc # Particle gun configuration
 │   ├── ActionInitialization.cc # User actions registration
