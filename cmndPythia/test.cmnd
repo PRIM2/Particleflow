@@ -1,0 +1,12 @@
+Beams:idA = 2212   ! proton
+Beams:idB = 2212   !
+
+! Energy (GeV)
+Beams:eCM = 8000.
+
+! Type of process   
+SoftQCD:all = on 
+!HardQCD:all = on
+
+! Minimun energy colision
+PhaseSpace:pTHatMin = 20.

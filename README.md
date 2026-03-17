@@ -1,6 +1,14 @@
 # pgun — Geant4 Particle Gun Simulation
-
+## REAMDE NOT UPDATED (not pythia - hepmc3)
 Simulation of particles traversing a shielding system (lead + concrete) and an R-134a gas detector using [Geant4](https://geant4.org/).
+
+---
+
+## NOTA MENTA: utilizo
+```
+- BUILD_DIR -> direcciones de ejecucion i.e logs (contempla varios binarios)
+- PROJECT_DIR -> dir de params (configs, cmnd, src...)
+```
 
 ---
 
@@ -87,7 +95,6 @@ pgun/
 │   ├── PrimaryGeneratorAction.cc # Particle gun configuration
 │   ├── ActionInitialization.cc # User actions registration
 │   ├── GasSD.cc                # Sensitive detector implementation
-│   └── Messages.cc             # Logging utilities
 ├── include/                    # Corresponding header files
 ├── macros/
 │   ├── run.mac                 # Example batch macro

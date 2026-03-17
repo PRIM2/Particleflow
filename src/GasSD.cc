@@ -77,7 +77,7 @@ void GasSD::EndOfEvent(G4HCofThisEvent* /*hce*/)
   const G4int nTracks = static_cast<G4int>(fTrackIDs.size());
 
   // DATA LOG INSTO /build/results/...
-  std::filesystem::create_directories(std::string(BUILD_DIR) + "/results");
+  std::filesystem::create_directories(std::string(BUILD_DIR) + "/results"); //build por si hay varios binarios...
   
   std::ostringstream fname;  
   fname << BUILD_DIR << "/results/gas_event_" << eventID << ".dat";

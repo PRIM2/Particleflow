@@ -10,22 +10,67 @@
 #include "G4VModularPhysicsList.hh"
 
 #include <ios>
+#include <unistd.h>   // getopt
+
 
 #include "DetectorConstruction.hh"
 #include "ActionInitialization.hh"
-#include "Messages.hh"
 #include "Pythia8/Pythia.h"
 
 
+#include "Collider.hh"
+
 int main(int argc, char** argv) {
-  // Header
-  G4cout << "\nGeant4 version: " << G4Version << G4endl;	
-  G4cout << msg::OUT << " pgun.cc working\n" << G4endl;
-  //G4cerr << msg::ERR_INI <<"This is an error" << msg::ERR_END << G4endl;
+
+    int opt;
+    int nEvents = 100;  // Valor por defecto
+    G4String geantConfigFile = "run.mac"; 
+    std::string pythiaConfigFile = "test.cmnd";
+    bool uiMode = false;
 
 
+    while ((opt = getopt(argc, argv, "hc:p:n:i")) != -1) {
+        switch (opt) {
+            case 'h': {
+                std::cout << "Usage: ./pgun\n";
+                std::cout << "  -c <config.macro>   Geant4 macro file\n";
+                std::cout << "  -p <pythia.cmnd>    Pythia config file\n";
+                std::cout << "  -n <events>         Number of pythia events\n";
+                std::cout << "  -i                  Interactive mode\n";
+                return 0;
+            }
 
+            case 'c': {
+                geantConfigFile = optarg;
+                break;
+            }
+
+            case 'p': {
+                pythiaConfigFile = optarg;
+                break;
+            }
+
+            case 'n': {
+                nEvents = std::stoi(optarg);
+                break;
+            }
+
+            case 'i': {
+                uiMode = true;
+                break;
+            }
+
+            default: {
+                std::cerr << "Unknown option\n";
+                return 1;
+            }
+        }
+    }
+
+  
   /* -------- CODE  --------- */
+  /*
+  
  // 1) Run manager (secuencial)
   auto* runManager = new G4RunManager();
 
@@ -47,15 +92,14 @@ int main(int argc, char** argv) {
   // 6) UI manager
   auto* UImanager = G4UImanager::GetUIpointer();
 
-  // Si pasas un macro como argumento: ./pgun macros/init.mac
-  if (argc > 1) {
-    G4String command = "/control/execute ";
-    G4String fileName = argv[1];
-    UImanager->ApplyCommand(command + fileName);
-  } else {
+  
+  G4String command = "/control/execute "; // command to execute macro files (always same)
+
+  UImanager->ApplyCommand(command + std::string(PROJECT_DIR) + "/macros/" + geantConfigFile);
+
+  if (uiMode) {
     // Modo interactivo
     auto* ui = new G4UIExecutive(argc, argv);
-    UImanager->ApplyCommand("/control/execute macros/init.mac");
     ui->SessionStart();
     delete ui;
   }
@@ -64,8 +108,14 @@ int main(int argc, char** argv) {
   delete runManager;
 
 
-  /* --------- Code Ending --------- */
-  G4cout << "\n\nNormal Termination at " << msg::ExecutionTime() << G4endl;
+  
+  */
 
+  pruebasPythia(nEvents, pythiaConfigFile);
+
+
+  std::cout << "\n\nPYTHIA.CC IS WORKING: " << prueba() << std::endl;
+  std::cout << "Pythia initialized with config file: " << PROJECT_DIR <<  "/src/test.cmnd" << std::endl;
   return 0;
+  
 }

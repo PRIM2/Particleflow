@@ -29,26 +29,30 @@ execute_process(
 set(PGUN_SOURCES
   src/bin/pgun.cc
   src/ActionInitialization.cc
-  src/Messages.cc
   src/DetectorConstruction.cc
   src/PrimaryGeneratorAction.cc
   src/GasSD.cc
+  src/Collider.cc
 )
 
 add_executable(pgun ${PGUN_SOURCES})
 
 target_include_directories(pgun PRIVATE
-  ${PROJECT_SOURCE_DIR}/include
+  ${PROJECT_SOURCE_DIR}/include #este es el mio
   ${PYTHIA8_PREFIX}/include
+  ${HEPMC3_PREFIX}/include
 )
 
 target_link_directories(pgun PRIVATE
   ${PYTHIA8_PREFIX}/lib
+  ${HEPMC3_PREFIX}/lib
 )
 
 target_link_libraries(pgun PRIVATE
   ${Geant4_LIBRARIES}
   pythia8
+  HepMC3
 )
 
 target_compile_definitions(pgun PRIVATE BUILD_DIR="${CMAKE_BINARY_DIR}")
+target_compile_definitions(pgun PRIVATE PROJECT_DIR="${CMAKE_SOURCE_DIR}")
