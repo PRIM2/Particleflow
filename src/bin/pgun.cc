@@ -19,7 +19,7 @@
 
 
 #include "Collider.hh"
-
+  
 int main(int argc, char** argv) {
 
     int opt;
@@ -69,9 +69,10 @@ int main(int argc, char** argv) {
 
   
   /* -------- CODE  --------- */
-  /*
+
+  pruebasPythia(nEvents, pythiaConfigFile);
   
- // 1) Run manager (secuencial)
+  // 1) Run manager (secuencial)
   auto* runManager = new G4RunManager();
 
   // 2) Geometría
@@ -106,13 +107,6 @@ int main(int argc, char** argv) {
 
   delete visManager;
   delete runManager;
-
-
-  
-  */
-
-  pruebasPythia(nEvents, pythiaConfigFile);
-
 
   std::cout << "\n\nPYTHIA.CC IS WORKING: " << prueba() << std::endl;
   std::cout << "Pythia initialized with config file: " << PROJECT_DIR <<  "/src/test.cmnd" << std::endl;

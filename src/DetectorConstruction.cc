@@ -12,11 +12,13 @@
 #include "GasSD.hh"
 
 G4VPhysicalVolume* DetectorConstruction::Construct() {
+  const int zAbsolute = -5;
+
   auto nist = G4NistManager::Instance();
 
   // World (aire) 3x3x3 m  -> semilados 1.5 m
   auto worldMat = nist->FindOrBuildMaterial("G4_AIR");
-  auto solidWorld = new G4Box("World", 4*m, 4*m, 4*m);
+  auto solidWorld = new G4Box("World", 4*m, 4*m,10*m);
   auto logicWorld = new G4LogicalVolume(solidWorld, worldMat, "World");
   auto physWorld  = new G4PVPlacement(nullptr, {}, logicWorld, "World", nullptr, false, 0);
 
@@ -26,7 +28,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct() {
   auto solidPbWall = new G4Box("PbWall", 3.5*m,3.5*m, 0.5*m);
   auto logicPbWall = new G4LogicalVolume(solidPbWall, pbMat, "PbWall");
   new G4PVPlacement(nullptr, 
-                    G4ThreeVector(0, 0, -1.5*m), 
+                    G4ThreeVector(0, 0, (zAbsolute-1.5)*m), 
                     logicPbWall, "PbWall", 
                     logicWorld, 
                     false, 
@@ -38,7 +40,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct() {
   auto solidConWall = new G4Box("ConcreteWall", 3.5*m, 3.5*m, 50*cm); 
   auto logicConWall = new G4LogicalVolume(solidConWall, conMat, "ConcreteWall");
   new G4PVPlacement(nullptr, 
-                    G4ThreeVector(0, 0, 0*m), 
+                    G4ThreeVector(0, 0, (zAbsolute+0)*m), 
                     logicConWall, 
                     "ConcreteWall", 
                     logicWorld, 
@@ -67,7 +69,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct() {
   auto solidR134aDet = new G4Box("R134aDet", 3.5*m, 3.5*m, 20*cm);
   fLogicGasDet = new G4LogicalVolume(solidR134aDet, r134aMat, "R134aDet");
   new G4PVPlacement(nullptr,
-                    G4ThreeVector(0., 0., -3*m),
+                    G4ThreeVector(0., 0., (zAbsolute-3)*m),
                     fLogicGasDet,
                     "R134aDet",
                     logicWorld,
@@ -75,7 +77,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct() {
                     0);
                     
   new G4PVPlacement(nullptr,
-                  G4ThreeVector(0., 0., -3.5*m),
+                  G4ThreeVector(0., 0., (zAbsolute-3.5)*m),
                   fLogicGasDet,
                   "R134aDet",
                   logicWorld,

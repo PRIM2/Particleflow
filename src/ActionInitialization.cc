@@ -2,7 +2,10 @@
 #include "PrimaryGeneratorAction.hh"
 
 void ActionInitialization::Build() const {
-  SetUserAction(new PrimaryGeneratorAction());
+  // PArticle gun
+  //SetUserAction(new PrimaryGeneratorAction());
+
+  SetUserAction(new PrimaryGeneratorAction(std::string(BUILD_DIR) + "/tmp/" "test.hepmc"));
 }
 
 void ActionInitialization::BuildForMaster() const {

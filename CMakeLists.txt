@@ -56,3 +56,14 @@ target_link_libraries(pgun PRIVATE
 
 target_compile_definitions(pgun PRIVATE BUILD_DIR="${CMAKE_BINARY_DIR}")
 target_compile_definitions(pgun PRIVATE PROJECT_DIR="${CMAKE_SOURCE_DIR}")
+
+# Obtener el prefix de Geant4 automáticamente
+get_target_property(GEANT4_LIB_DIR Geant4::G4tracking LOCATION)
+cmake_path(GET GEANT4_LIB_DIR PARENT_PATH GEANT4_LIB_DIR)
+
+set_target_properties(pgun PROPERTIES
+  BUILD_WITH_INSTALL_RPATH TRUE
+  INSTALL_RPATH "${GEANT4_LIB_DIR};${PYTHIA8_PREFIX}/lib;${HEPMC3_PREFIX}/lib"
+)
+
+target_link_options(pgun PRIVATE "-Wl,--disable-new-dtags")
