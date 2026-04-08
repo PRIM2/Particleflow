@@ -2,6 +2,8 @@
 ## REAMDE NOT UPDATED (not pythia - hepmc3)
 Simulation of particles traversing a shielding system (lead + concrete) and an R-134a gas detector using [Geant4](https://geant4.org/).
 
+> [!WARNING]
+> To update, not explained new binaries and also new structure..
 ---
 
 ## NOTA MENTA: utilizo
@@ -94,7 +96,7 @@ pgun/
 │   ├── DetectorConstruction.cc # Geometry definition
 │   ├── PrimaryGeneratorAction.cc # Particle gun configuration
 │   ├── ActionInitialization.cc # User actions registration
-│   ├── GasSD.cc                # Sensitive detector implementation
+│   ├──DetectorSD.cc                # Sensitive detector implementation
 ├── include/                    # Corresponding header files
 ├── macros/
 │   ├── run.mac                 # Example batch macro

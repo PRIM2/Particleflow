@@ -9,7 +9,7 @@
 #include "DetectorConstruction.hh"
 
 #include "G4SDManager.hh"
-#include "GasSD.hh"
+#include "DetectorSD.hh"
 
 G4VPhysicalVolume* DetectorConstruction::Construct() {
   const int zAbsolute = -5;
@@ -24,6 +24,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct() {
 
 
   // Muro de plomo (cara +X), espesor 10 cm
+  /*
   auto pbMat = nist->FindOrBuildMaterial("G4_Pb");
   auto solidPbWall = new G4Box("PbWall", 3.5*m,3.5*m, 0.5*m);
   auto logicPbWall = new G4LogicalVolume(solidPbWall, pbMat, "PbWall");
@@ -33,7 +34,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct() {
                     logicWorld, 
                     false, 
                     0);
-
+  
 
   // Muro de hormigón (cara +Y), espesor 10 cm
   auto conMat = nist->FindOrBuildMaterial("G4_CONCRETE");
@@ -46,8 +47,21 @@ G4VPhysicalVolume* DetectorConstruction::Construct() {
                     logicWorld, 
                     false, 
                     0);
+  */
 
-
+  // AirWall (cara +X)
+  auto airMat = nist->FindOrBuildMaterial("G4_AIR");
+  auto solidAirWall = new G4Box("AirWall", 3.5*m,3.5*m, 20*cm);
+  auto logicAirWall = new G4LogicalVolume(solidAirWall, airMat, "AirWall");
+  fLogicGasDet = logicAirWall;
+  new G4PVPlacement(nullptr, 
+                    G4ThreeVector(0, 0, (zAbsolute-3)*m), 
+                    logicAirWall, "AirWall", 
+                    logicWorld, 
+                    false, 
+                    0);
+    
+  /*
   // --- Material: R-134a (C2H2F4), gas ---
   auto elC = nist->FindOrBuildElement("C");
   auto elH = nist->FindOrBuildElement("H");
@@ -60,11 +74,12 @@ G4VPhysicalVolume* DetectorConstruction::Construct() {
   // Densidad aproximada del R-134a gas a 1 atm y 25 ºC
   G4double density     = 4.25*mg/cm3;  // miami me lo confirmo
 
+  
   auto r134aMat = new G4Material("R134A", density, 3, kStateGas, temperature, pressure);
   r134aMat->AddElement(elC, 2);
   r134aMat->AddElement(elH, 2);
   r134aMat->AddElement(elF, 4);
-
+    
   // Detector lleno de gas R-134a
   auto solidR134aDet = new G4Box("R134aDet", 3.5*m, 3.5*m, 20*cm);
   fLogicGasDet = new G4LogicalVolume(solidR134aDet, r134aMat, "R134aDet");
@@ -75,7 +90,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct() {
                     logicWorld,
                     false,
                     0);
-                    
+
+  
   new G4PVPlacement(nullptr,
                   G4ThreeVector(0., 0., (zAbsolute-3.5)*m),
                   fLogicGasDet,
@@ -83,9 +99,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct() {
                   logicWorld,
                   false,
                   1);
-                                  
-              
+  
+  */            
   return physWorld;
+  
 }
 
 
@@ -97,11 +114,10 @@ void DetectorConstruction::ConstructSDandField()
   auto sdManager = G4SDManager::GetSDMpointer();
 
   // Creamos nuestro sensitive detector para el gas
-  auto gasSD = new GasSD("GasSD");
+  auto gasSD = new DetectorSD("DetectorSD");
   sdManager->AddNewDetector(gasSD);
 
   // Asignamos el SD al volumen lógico del gas
-  if (fLogicGasDet) {
-    fLogicGasDet->SetSensitiveDetector(gasSD);
-  }
+  if (fLogicGasDet) fLogicGasDet->SetSensitiveDetector(gasSD);
+  //Se puede poner más detectores, pero hay que ponerlo en el .h (private)
 }
