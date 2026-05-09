@@ -26,6 +26,7 @@ set(SHARED_SOURCES
   src/geant4/DetectorConstruction.cc
   src/geant4/PrimaryGeneratorAction.cc
   src/geant4/G4Simulator.cc
+  src/geant4/StackingAction.cc
   src/detector/DetectorSD.cc
   src/collider/Collider.cc
 )

@@ -1,5 +1,7 @@
+// ActionInitialization.cc
 #include "ActionInitialization.hh"
 #include "PrimaryGeneratorAction.hh"
+#include "StackingAction.hh"
 
 void ActionInitialization::Build() const {
     std::string filepath = m_hepmcFile.empty() 
@@ -13,6 +15,8 @@ void ActionInitialization::Build() const {
         std::cerr << "[ERROR] Fichero NO encontrado: " << filepath << std::endl;
 
     SetUserAction(new PrimaryGeneratorAction(filepath));
+    SetUserAction(new StackingAction());    
+    
 }
 
 void ActionInitialization::BuildForMaster() const {

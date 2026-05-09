@@ -5,11 +5,12 @@
 
 /tracking/storeTrajectory 1
 
-
 /run/initialize
 
 # /vis/open OGLSX 1000x800-0+0
-/vis/open OGLSX 960x1080-0+0
+# /vis/open OGLSX 960x1080-0+0
+/vis/open OGLSX 1850x1000+0+0
+# /vis/open OGLSX 3000x2200-0+0
 
 /vis/verbose warnings
 
@@ -19,42 +20,65 @@
 /vis/scene/add/axes 0 0 0 1 m
 /vis/scene/add/axes 0 0 0 50 cm
 
-
-# Vista (sin autoRefresh al principio)
+# Vista
 /vis/viewer/set/style wireframe
-/vis/viewer/set/viewpointThetaPhi 80 15
+/vis/viewer/set/viewpointThetaPhi 15 160
 /vis/viewer/zoom 1
+/vis/viewer/set/background 1 1 1 1   # blanco puro
+
+/vis/viewer/set/auxiliaryEdge true
+/vis/viewer/set/lineSegmentsPerCircle 200
+# /vis/viewer/set/background 0.95 0.95 0.90 1   # crema suave
+# /vis/viewer/set/background 0.94 0.94 0.94 1   # gris claro
+# /vis/viewer/set/background 0.90 0.93 0.96 1   # azul elegante
+# /vis/viewer/set/background 0.84 0.89 0.95 1   # azul tecnico
+/vis/viewer/set/autoRefresh true
+/vis/viewer/set/auxiliaryEdge true
+
+# Geometría
+/vis/geometry/set/forceWireframe World 0 true
+/vis/geometry/set/visibility World 0 true
 
 # Dibuja y deja la escena lista
 /vis/drawVolume
 /vis/viewer/rebuild
 /vis/viewer/flush
 
-# Ahora sí: refresco automático
-/vis/viewer/set/autoRefresh true
-
-# (Opcional) Tracks de 1 evento para comprobar que también se quedan
+# Trayectorias
 /vis/scene/add/trajectories smooth
 /vis/scene/endOfEventAction accumulate
-# /run/beamOn 1
-/vis/viewer/flush
-
-
-# Trayectorias ON
-/tracking/storeTrajectory 1
-/vis/scene/add/trajectories smooth
 
 # Colorear por tipo de partícula (ParticleID)
 /vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/default/setLineWidth 1.5
 
-# # Asignaciones típicas (ajústalas a gusto)
-# /vis/modeling/trajectories/drawByParticleID-0/set e- green
-# /vis/modeling/trajectories/drawByParticleID-0/set e+ cyan
-# /vis/modeling/trajectories/drawByParticleID-0/set gamma yellow
-# /vis/modeling/trajectories/drawByParticleID-0/set mu- red
-# /vis/modeling/trajectories/drawByParticleID-0/set mu+ magenta
-# /vis/modeling/trajectories/drawByParticleID-0/set proton blue
-# /vis/modeling/trajectories/drawByParticleID-0/set neutron gray
+# e- azul intenso
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA e- 0.00 0.35 0.90 1
+
+# e+ magenta
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA e+ 0.85 0.00 0.55 1
+
+# gamma naranja fuerte
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA gamma 0.95 0.55 0.00 1
+
+# mu- verde oscuro
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA mu- 0.00 0.55 0.15 1
+
+# mu+ púrpura
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA mu+ 0.55 0.00 0.75 1
+
+# proton rojo oscuro
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA proton 0.75 0.10 0.10 1
+
+# neutron gris antracita
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA neutron 0.25 0.25 0.25 1
 
 # (Opcional) dibujar puntos de paso para entender dónde interactúa
 # /vis/modeling/trajectories/drawByParticleID-0/default/setDrawStepPts true
+
+# Reconstruir la escena antes de disparar
+/vis/viewer/rebuild
+
+# /run/beamOn 1
+
+/vis/ogl/export output.svg

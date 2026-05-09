@@ -19,8 +19,6 @@ class DetectorSD : public G4VSensitiveDetector {
 public:
   DetectorSD(const G4String& name);
   
-  // IMPORTANTE: El destructor ya no puede ser default, 
-  // necesitamos que cierre el archivo al terminar el programa.
   virtual ~DetectorSD(); 
 
   void Initialize(G4HCofThisEvent* hce) override;
@@ -41,11 +39,7 @@ private:
   std::vector<StepRecord> fSteps;
   std::unique_ptr<HepMC3::WriterAscii> fWriterHepMC3;
 
-  // ESTA ES LA CLAVE: El contador que nunca vuelve a cero
   G4int fTotalEventsProcessed; 
-
-  // Acumuladores temporales por cada evento (se limpian en Initialize)
-  G4double fEdepTot;
 };
 
 #endif

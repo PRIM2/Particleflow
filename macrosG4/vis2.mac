@@ -1,0 +1,53 @@
+/control/verbose 2
+/run/verbose 1
+/event/verbose 0
+/tracking/verbose 0
+
+/tracking/storeTrajectory 1
+
+/run/initialize
+
+/vis/open OGLSX 1850x1000+0+0
+/vis/verbose warnings
+
+# Escena
+/vis/scene/create
+/vis/scene/add/volume
+/vis/scene/add/axes 0 0 0 1 m
+/vis/scene/add/axes 0 0 0 50 cm
+
+# Vista
+/vis/viewer/set/style wireframe
+/vis/viewer/set/viewpointThetaPhi 0 160
+/vis/viewer/zoom 1
+/vis/viewer/set/background 1 1 1 1
+/vis/viewer/set/auxiliaryEdge true
+/vis/viewer/set/lineSegmentsPerCircle 200
+/vis/viewer/set/autoRefresh true
+
+# Geometría
+/vis/geometry/set/forceWireframe World 0 true
+/vis/geometry/set/visibility World 0 true
+
+/vis/drawVolume
+/vis/viewer/rebuild
+/vis/viewer/flush
+
+# Trayectorias
+/vis/scene/add/trajectories smooth
+/vis/scene/endOfEventAction accumulate
+
+# Colorear por tipo de partícula
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/default/setLineWidth 1.5
+
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA e-      0.00 0.35 0.90 1
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA e+      0.85 0.00 0.55 1
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA gamma   0.95 0.55 0.00 1
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA mu-     0.00 0.55 0.15 1
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA mu+     0.55 0.00 0.75 1
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA proton  0.75 0.10 0.10 1
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA neutron 0.25 0.25 0.25 1
+
+/vis/viewer/rebuild
+# /run/beamOn 1
