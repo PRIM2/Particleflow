@@ -1,0 +1,26 @@
+[Run]
+nEvents = 100
+mode = "pgun-and-run"
+hepmcOutput = "resultss/ALOHA.hepmc"
+
+
+[Pythia]
+cmndFile = "config/cmndPythia/test.cmnd"
+
+[Pgun] # GeV 
+energy = 100.0
+pdg = 2212
+mass = 0.938272
+
+[Geant4]
+input = "resultss/ALOHA.hepmc"
+output = "resultss/Callate2.0.hepmc"
+ui = false
+geometry = "SimpleWall"
+
+[Geant4.AngularFilter]
+enabled = true
+targetX = 29.74142
+targetY = -4.26804
+targetZ = 9.33062
+theta = 50.0

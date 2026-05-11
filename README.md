@@ -6,7 +6,7 @@ Simulation of particles traversing a shielding system (lead + concrete) and an R
 > To update, not explained new binaries and also new structure..
 ---
 
-## NOTA MENTA: utilizo
+## NOTA MENTAL: utilizo
 ```
 - BUILD_DIR -> direcciones de ejecucion i.e logs (contempla varios binarios)
 - PROJECT_DIR -> dir de params (configs, cmnd, src...)

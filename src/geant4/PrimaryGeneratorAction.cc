@@ -1,5 +1,5 @@
 // PrimaryGeneratorAction.cc
-#include "PrimaryGeneratorAction.hh"
+#include "geant4/PrimaryGeneratorAction.hh"
 
 #include "G4Event.hh"
 #include "G4PrimaryVertex.hh"
@@ -36,7 +36,8 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* g4event) {
   for (auto& vertex : hepEvent.vertices()) {
       auto pos = vertex->position();
       G4PrimaryVertex* g4vertex = new G4PrimaryVertex(
-          pos.x(), pos.y(), pos.z(), pos.t());
+          // pos.x()*mm, pos.y()*mm, pos.z()*mm, pos.t()); // TODO: revisar tiempo unidades
+          pos.x()*mm, pos.y()*mm, pos.z()*mm, 0*ns); // todo tiempo 0, no interactuan entre si asiq da igual
 
       G4PrimaryParticle* first = nullptr;
       G4PrimaryParticle* last  = nullptr;
