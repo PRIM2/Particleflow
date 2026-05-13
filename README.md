@@ -1,289 +1,275 @@
-# pgun — Geant4 Particle Gun Simulation
-## REAMDE NOT UPDATED (not pythia - hepmc3)
-Simulation of particles traversing a shielding system (lead + concrete) and an R-134a gas detector using [Geant4](https://geant4.org/).
+# ParticleFlow
 
-> [!WARNING]
-> To update, not explained new binaries and also new structure..
----
+ParticleFlow is a C++17 simulation project that connects event generation with Geant4 detector simulation through HepMC3 event files.
 
-## NOTA MENTAL: utilizo
-```
-- BUILD_DIR -> direcciones de ejecucion i.e logs (contempla varios binarios)
-- PROJECT_DIR -> dir de params (configs, cmnd, src...)
-```
+It supports two event sources:
+
+* a simple particle gun;
+* Pythia8 generation from `.cmnd` files.
+
+Generated events can be written to HepMC3, passed directly to Geant4, or read later from an existing HepMC3 file.
 
 ---
 
-## Quick Start
+## Features
 
-Clean build and compile:
-
-```bash
-rm -rf build
-cmake -S . -B build
-cmake --build build -j8
-```
-
-Interactive execution:
-
-```bash
-./build/bin/pgun
-```
-
-Batch execution with a macro:
-
-```bash
-./build/bin/pgun path/to/macro.mac
-```
-
-Simulation results are written to:
-
-```
-build/results/
-```
-
----
-
-## General Description
-
-The program generates three primary particles per event:
-
-- neutron
-- negative muon
-- positive kaon
-
-Each particle has an energy of **20 GeV** and is fired in the **+Z direction** from `z = −19.8 m`.
-
-The particles traverse the following geometry:
-
-| Component | Dimensions | Center |
-|---|---|---|
-| Lead wall | 7 × 7 × 8 m | z = −5 m |
-| Concrete wall | 7 × 7 × 7 m | z = +11.6 m |
-| Gas detector layer 1 | 7 × 7 m, 4 cm thick | z = +18.8 m |
-| Gas detector layer 2 | 7 × 7 m, 4 cm thick | z = +19.2 m |
-
-The world volume is an air box of **8 × 8 × 40 m**.
-
-The gas detector is instrumented with a Sensitive Detector (`GasSD`) that records simulation steps with energy deposition and writes one `.dat` file per event.
-
----
-
-## Physics List
-
-The simulation uses the Geant4 reference physics list:
-
-```
-FTFP_BERT
-```
-
-This includes:
-
-- Fritiof high-energy hadronic model
-- Bertini cascade for intermediate energies
-- Standard electromagnetic physics
-
----
-
-## Project Structure
-
-```
-pgun/
-├── CMakeLists.txt              # CMake build configuration
-├── CMakePresets.json           # CMake build presets (predefined configure/build settings)
-├── src/
-│   ├── pgun.cc                 # Entry point; sets RunManager, physics and UI
-│   ├── DetectorConstruction.cc # Geometry definition
-│   ├── PrimaryGeneratorAction.cc # Particle gun configuration
-│   ├── ActionInitialization.cc # User actions registration
-│   ├──DetectorSD.cc                # Sensitive detector implementation
-├── include/                    # Corresponding header files
-├── macros/
-│   ├── run.mac                 # Example batch macro
-│   ├── vis.mac                 # Visualization macro
-│   ├── init.mac                # Initialization macro
-│   ├── zzlib.mac               # Useful Geant4 commands
-│   └── zzlib_valid.mac         # Geometry validation macros
-├── build/                      # CMake build directory
-│   ├── bin/                    # Compiled executables
-│   └── results/                # Simulation outputs
-├── logs/                       # Optional execution logs
-├── README.md
-└── MAKE_VS_CMAKE.md
-```
+* C++17 simulation workflow.
+* Particle gun event generation.
+* Pythia8 event generation.
+* HepMC3 input and output files.
+* Geant4 detector simulation.
+* Selectable Geant4 geometries.
+* Optional Geant4 interactive UI.
+* TOML-based run configuration.
 
 ---
 
 ## Requirements
 
-- Geant4 ≥ 11.x
-- CMake ≥ 3.10
-- C++17 compatible compiler (GCC or Clang)
-- Geant4 must be correctly configured in your environment (datasets, libraries, etc.)
+ParticleFlow requires:
 
-If CMake cannot find Geant4 automatically, configure it manually:
+* CMake;
+* a C++17 compatible compiler;
+* Geant4;
+* HepMC3;
+* Pythia8.
 
-```bash
-cmake -S . -B build -DGeant4_DIR=/path/to/Geant4/lib64/cmake/Geant4
+The corresponding environment must be correctly configured before building the project. In particular, Geant4 datasets and runtime variables must be available.
+
+Depending on the local installation, the following tools or paths may need to be visible to CMake:
+
+```text
+geant4-config
+HepMC3-config
+pythia8-config
 ```
 
 ---
 
-## Build Workflow
+## Repository structure
 
-### Clean Build
+```text
+.
+├── CMakeLists.txt
+├── CMakePresets.json
+├── README.md
+├── CONFIG.md
+├── config/
+│   ├── cmndPythia/
+│   ├── macrosG4/
+│   └── runs/
+├── include/
+│   ├── config/
+│   ├── generators/
+│   └── geant4/
+├── src/
+│   ├── bin/
+│   ├── config/
+│   ├── generators/
+│   └── geant4/
+├── results/
+├── notes/
+└── build/
+```
+
+### Main directories
+
+* `src/`: C++ source files.
+* `include/`: project headers.
+* `config/`: input configuration files, Pythia command files, and Geant4 macros.
+* `config/runs/`: TOML run files.
+* `config/cmndPythia/`: Pythia8 `.cmnd` files.
+* `config/macrosG4/`: Geant4 visualization and export macros.
+* `results/`: generated outputs such as HepMC3 files and plots.
+* `notes/`: development notes and temporary material.
+* `build/`: local CMake build directory.
+
+`build/` is generated locally and can be safely removed and regenerated.
+
+---
+
+## Build
+
+From the project root directory:
 
 ```bash
 rm -rf build
-cmake -S . -B build
+cmake --preset default
 cmake --build build -j8
 ```
 
-### Incremental Build
-
-If the project is already configured:
+For incremental builds:
 
 ```bash
 cmake --build build -j8
 ```
 
+The main executable is generated at:
+
+```text
+build/bin/particleflow
+```
+
 ---
 
-## Running the Simulation
+## Usage
 
-### Interactive Mode
-
-Run without arguments:
+Run ParticleFlow from the project root directory:
 
 ```bash
-./build/bin/pgun
+./build/bin/particleflow -c config/runs/full-example.toml
 ```
 
-This starts the Geant4 interactive session (`Idle>`). Example commands:
-
-```
-/control/execute macros/init.mac
-/control/execute macros/vis.mac
-/run/beamOn 1
-```
-
-### Batch Mode
-
-Run using a macro file:
+Show the help message:
 
 ```bash
-./build/bin/pgun macros/run.mac
+./build/bin/particleflow -h
 ```
 
-The macro controls initialization, visualization, and number of events. Example inside a macro:
+The executable accepts the following options:
 
+```text
+-c FILE   Run configuration file
+-h        Show the help message
 ```
-/run/beamOn 10
+
+Paths passed with `-c` are interpreted relative to the project root directory.
+
+---
+
+## Configuration
+
+Runs are configured through TOML files stored in `config/runs/`.
+
+A complete example is provided at:
+
+```text
+config/runs/full-example.toml
+```
+
+The configuration format is documented separately in:
+
+```text
+CONFIG.md
 ```
 
 ---
 
-## Output Data
+## Workflow overview
 
-For each event, the `GasSD` sensitive detector writes a file:
+ParticleFlow can be used in several ways depending on the selected run configuration:
 
-```
-build/results/gas_event_<eventID>.dat
-```
+1. Generate events with the particle gun.
+2. Generate events with Pythia8.
+3. Write generated events to HepMC3.
+4. Read existing HepMC3 events.
+5. Run events through Geant4.
+6. Write the Geant4 output to a new HepMC3 file.
 
-Example:
-
-```
-build/results/gas_event_0.dat
-build/results/gas_event_1.dat
-```
-
-> This output path is independent of the directory from which the executable is launched.
-
-### Output File Format
-
-Each file contains two parts.
-
-**Event Summary**
-
-```
-# eventID  Edep_gas_total[MeV]  Nsteps_in_gas  Ntracks_in_gas
-0 0.1977342711 31 12
-```
-
-**Step-by-Step Data**
-
-```
-t0[ns],x0[mm],y0[mm],z0[mm],x1[mm],y1[mm],z1[mm],Edep[MeV],event_id,track_id,pdg,volume_name,volume_copyNo
-```
-
-Each row corresponds to a simulation step inside the gas volume with energy deposition > 0.
-
-| Field | Description |
-|---|---|
-| `t0` | Global time at the beginning of the step (ns) |
-| `x0, y0, z0` | Position at the beginning of the step (mm) |
-| `x1, y1, z1` | Position at the end of the step (mm) |
-| `Edep` | Energy deposited during the step (MeV) |
-| `event_id` | Event identifier |
-| `track_id` | Particle track identifier |
-| `pdg` | Particle PDG code |
-| `volume_name` | Detector volume name |
-| `volume_copyNo` | Copy number of the detector volume |
+The selected workflow is controlled by the TOML run file. See `CONFIG.md` for the available options.
 
 ---
 
-## Modifying the Simulation
+## Geant4 simulation
 
-### Changing the Particle Gun
+The Geant4 part of the project is implemented under:
 
-Edit `src/PrimaryGeneratorAction.cc`. Parameters that can be modified:
-
-**Energy:**
-```cpp
-fGun->SetParticleEnergy(20.*GeV);
+```text
+src/geant4/
+include/geant4/
 ```
 
-**Direction:**
-```cpp
-fGun->SetParticleMomentumDirection({0.,0.,1.});
+It includes:
+
+* detector construction;
+* action initialization;
+* primary generation from HepMC3 input;
+* sensitive detectors;
+* selectable geometries;
+* optional UI execution.
+
+When the UI is disabled, the simulation runs directly in batch mode. When the UI is enabled, a Geant4 interactive session is started.
+
+Visualization and export macros are stored in:
+
+```text
+config/macrosG4/
 ```
-
-**Initial position:**
-```cpp
-fGun->SetParticlePosition({0.,0.,-19.8*m});
-```
-
-**Particle type:**
-```cpp
-particleTable->FindParticle("mu-")
-particleTable->FindParticle("proton")
-particleTable->FindParticle("gamma")
-```
-
-### Changing the Geometry
-
-Edit `src/DetectorConstruction.cc`. Geometry components include:
-
-- world volume
-- lead wall
-- concrete wall
-- gas detector layers
-
-Materials are defined using the Geant4 NIST material database. The R-134a gas mixture (C₂H₂F₄) is defined explicitly from its elemental composition.
-
-### Changing the Number of Events
-
-Edit the macro file `macros/run.mac`:
-
-```
-/run/beamOn 100
-```
-
-You can also create your own macros to define different run configurations.
 
 ---
 
-## Notes
+## Event generation
 
-The project uses out-of-source builds, meaning all compilation artifacts remain inside `build/`. This keeps the source tree clean and allows rebuilding the entire project simply by deleting the `build/` directory.
+Event generation is implemented under:
+
+```text
+src/generators/
+include/generators/
+```
+
+The project currently provides:
+
+* `runPythia(...)`: reads a Pythia8 command file and writes generated events to HepMC3;
+* `particleGun(...)`: generates fixed-particle HepMC3 events with momentum along the positive x-axis.
+
+Pythia8 command files are stored in:
+
+```text
+config/cmndPythia/
+```
+
+---
+
+## Output files
+
+Output files are normally written under:
+
+```text
+results/
+```
+
+Typical outputs include:
+
+* generated HepMC3 files;
+* Geant4-processed HepMC3 files;
+* plots or analysis files.
+
+Generated output files are not required to build the project.
+
+---
+
+## Development notes
+
+The current executable entry point is:
+
+```text
+src/bin/particleflow.cc
+```
+
+The main internal components are:
+
+```text
+src/config/       TOML parsing and configuration loading
+src/generators/   Pythia8 and particle gun event generation
+src/geant4/       Geant4 simulation code
+```
+
+Sensitive detectors are located in:
+
+```text
+src/geant4/detectorSDs/
+include/geant4/detectorSDs/
+```
+
+Geometries are located in:
+
+```text
+src/geant4/geometries/
+include/geant4/geometries/
+```
+
+---
+
+## Status
+
+ParticleFlow is under active development. Interfaces, geometries, configuration fields, and output conventions may change while the simulation workflow is being consolidated.

@@ -1,20 +1,19 @@
 [Run]
 nEvents = 100
 mode = "pgun-and-run"
-hepmcOutput = "resultss/ALOHA.hepmc"
-
+hepmcOutput = "results/test_PGUN.hepmc"
 
 [Pythia]
 cmndFile = "config/cmndPythia/test.cmnd"
 
-[Pgun] # GeV 
+[Pgun] 
 energy = 100.0
 pdg = 2212
 mass = 0.938272
 
 [Geant4]
-input = "resultss/ALOHA.hepmc"
-output = "resultss/Callate2.0.hepmc"
+input = "results/test_PGUN.hepmc"
+output = "results/test_PARTICLEFLOW.0.hepmc"
 ui = false
 geometry = "SimpleWall"
 
