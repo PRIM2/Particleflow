@@ -1,0 +1,29 @@
+[Run]
+nEvents = 1000
+mode = "run-from-hepmc"
+hepmcOutput = "results/realistic_100000ev_PYTHIA.hepmc"
+
+[Pythia]
+cmndFile = "config/cmndPythia/test.cmnd"
+
+[Pgun] 
+energy = 100.0
+pdg = 2212
+mass = 0.938272
+
+[Geant4]
+input = "results/hard_100000ev_14tev_PYTHIA.hepmc"
+output = "results/test1/realistic_1000ev_PARTICLEFLOW.hepmc"
+ui = true
+geometry = "RealisticMap"
+
+[Geant4.AngularFilter]
+enabled = true
+targetX = 29.74142
+targetY = -4.26804
+targetZ = 9.33062
+theta = 50.0
+
+[Geant4.Geometry.RealisticMap]
+concreteHalfX = 0.33
+frontPbHalfZ = 0.33

@@ -1,0 +1,29 @@
+[Run]
+nEvents = 10
+mode = "run-from-hepmc"
+hepmcOutput = "results/hard_100000ev_14tev_PYTHIA.hepmc"
+
+[Pythia]
+cmndFile = "config/cmndPythia/test.cmnd"
+
+[Pgun]
+energy = 100.0
+pdg = 2212
+mass = 0.938272
+
+[Geant4]
+input = "results/hard_100000ev_14tev_PYTHIA.hepmc"
+output = "results/geometry_scan/ev10_concreteHalfX_0p55m_frontPbHalfZ_0p43m/ev10_concreteHalfX_0p55m_frontPbHalfZ_0p43m_PARTICLEFLOW.hepmc"
+ui = false
+geometry = "RealisticMap"
+
+[Geant4.AngularFilter]
+enabled = false
+targetX = 0.0
+targetY = 0.0
+targetZ = 0.0
+theta = 50.0
+
+[Geant4.Geometry.RealisticMap]
+concreteHalfX = 0.55
+frontPbHalfZ = 0.43

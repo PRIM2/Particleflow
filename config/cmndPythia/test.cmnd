@@ -2,7 +2,7 @@ Beams:idA = 2212   ! proton
 Beams:idB = 2212   !
 
 ! Energy (GeV)
-!Beams:eCM = 300.
+Beams:eCM = 14000.
 
 ! Type of process   
 !SoftQCD:all = on 

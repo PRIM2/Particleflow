@@ -140,7 +140,7 @@ GeometryResult GeometryRealistic::Construct() {
     G4ThreeVector endDetHalfSize(20*cm, 1.09*m, 1.14*m);
     G4ThreeVector endDetPos(29.74142*m + 20*cm, -4.26804*m, 9.33062*m);
     G4Colour endDetColour(0.0, 0.5, 1.0, 0.2);
-    G4String endDetName = "EndDetector";
+    G4String endDetName = "RPC";
 
     // Geometry
     auto solidEndDet = new G4Box(
@@ -191,6 +191,7 @@ GeometryResult GeometryRealistic::Construct() {
       concWallHalfSize.z()
     );
     auto logicConcWall = new G4LogicalVolume(solidConcWall, concreteMat, concWallName);
+    result.sensitiveVolumes.push_back({ logicConcWall, DetectorType::Generic, concWallName });
 
     // Visualization attributes
     auto concWallAtt = new G4VisAttributes(concWallColour);
@@ -238,6 +239,8 @@ GeometryResult GeometryRealistic::Construct() {
       pbMat,
       frontPbName
     );
+    result.sensitiveVolumes.push_back({ logicFrontPb,DetectorType::Generic, frontPbName });
+
 
     // Visualization attributes
     auto frontPbAtt = new G4VisAttributes(frontPbColour);
@@ -331,6 +334,9 @@ GeometryResult GeometryRealistic::Construct() {
       pbMat,
       backPbName
     );
+
+    result.sensitiveVolumes.push_back({ logicBackPb, DetectorType::Generic, backPbName });
+
 
     // Visualization attributes
     auto backPbAtt = new G4VisAttributes(backPbColour);

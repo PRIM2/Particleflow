@@ -35,6 +35,12 @@ namespace config {
         double theta = 50.0;
     };
 
+    struct RealisticMapConfig {
+        // Units assumed by the parser/user config: metres.
+        double concreteHalfX = 1.75;
+        double frontPbHalfZ = 1.25;
+    };
+
     struct Geant4Config {
         std::string input = "results/test_GENERATED.hepmc";
         std::string output = "results/test_PARTICLEFLOW.hepmc";
@@ -42,6 +48,7 @@ namespace config {
         std::string geometry = "SimpleWall";
 
         AngularFilterConfig angularFilter;
+        RealisticMapConfig realisticMap;
     };
 
     struct SimulationConfig {

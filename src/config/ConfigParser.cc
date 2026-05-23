@@ -47,6 +47,9 @@ const std::vector<ConfigKey> allowedKeys = {
     {"Geant4.AngularFilter", "targetY", ValueType::Double},
     {"Geant4.AngularFilter", "targetZ", ValueType::Double},
     {"Geant4.AngularFilter", "theta",   ValueType::Double},
+
+    {"Geant4.Geometry.RealisticMap", "concreteHalfX", ValueType::Double},
+    {"Geant4.Geometry.RealisticMap", "frontPbHalfZ",  ValueType::Double},
 };
 
 
@@ -300,6 +303,16 @@ void assignValue(
 
             if (section == "Geant4.AngularFilter" && key == "theta") {
                 cfg.geant4.angularFilter.theta = value;
+                return;
+            }
+
+            if (section == "Geant4.Geometry.RealisticMap" && key == "concreteHalfX") {
+                cfg.geant4.realisticMap.concreteHalfX = value;
+                return;
+            }
+
+            if (section == "Geant4.Geometry.RealisticMap" && key == "frontPbHalfZ") {
+                cfg.geant4.realisticMap.frontPbHalfZ = value;
                 return;
             }
 

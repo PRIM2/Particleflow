@@ -7,24 +7,37 @@
 #include <stdexcept>
 
 
-DetectorConstruction::DetectorConstruction(const std::string& geometryName, const std::string& output)
-  : m_geometryName(geometryName), m_output(output)  {}
+DetectorConstruction::DetectorConstruction(const config::Geant4Config& geant4Config)
+  : m_geant4Config(geant4Config)
+{
+}
+
 
 G4VPhysicalVolume* DetectorConstruction::Construct() {
   fSensitiveVolumes.clear();
 
   GeometryResult result;
 
-  if (m_geometryName == "SimpleWall") {
+  if (m_geant4Config.geometry == "SimpleWall") {
     GeometrySimpleWall geometry;
     result = geometry.Construct();
   }
-  else if (m_geometryName == "Realistic") {
+  else if (m_geant4Config.geometry == "Realistic") {
     GeometryRealistic geometry;
     result = geometry.Construct();
   }
+  else if (m_geant4Config.geometry == "RealisticMap") {
+    GeometryRealisticMapParams params;
+    params.concreteHalfX_m = m_geant4Config.realisticMap.concreteHalfX;
+    params.frontPbHalfZ_m  = m_geant4Config.realisticMap.frontPbHalfZ;
+
+    GeometryRealisticMap geometry(params);
+    result = geometry.Construct();
+  }
   else {
-    throw std::runtime_error("Unknown geometry: " + m_geometryName);
+    throw std::runtime_error(
+      "Unknown geometry: " + m_geant4Config.geometry
+    );
   }
 
   fSensitiveVolumes = result.sensitiveVolumes;
@@ -35,7 +48,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct() {
 
 void DetectorConstruction::ConstructSDandField() {
   auto sdManager = G4SDManager::GetSDMpointer();
-  BaseSD::SetOutputFile(m_output);
+
+  BaseSD::SetOutputFile(m_geant4Config.output);
 
   for (const auto& sensitive : fSensitiveVolumes) {
     if (!sensitive.logicVolume) {

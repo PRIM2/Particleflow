@@ -23,3 +23,7 @@ targetX = 29.74142
 targetY = -4.26804
 targetZ = 9.33062
 theta = 50.0
+
+[Geant4.Geometry.RealisticMap]
+concreteHalfX = 1.75
+frontPbHalfZ = 1.25

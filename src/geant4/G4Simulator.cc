@@ -34,7 +34,7 @@ void G4Simulator::run(int argc, char** argv) {
 
     auto* runManager = new G4RunManager();
 
-    auto* detector = new DetectorConstruction(m_cfg.geometry, m_cfg.output);
+    auto* detector = new DetectorConstruction(m_cfg);
     runManager->SetUserInitialization(detector);
 
     G4PhysListFactory factory;

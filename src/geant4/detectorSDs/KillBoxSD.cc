@@ -8,7 +8,7 @@
 #include "G4VPhysicalVolume.hh"
 
 KillBoxSD::KillBoxSD(const G4String& name)
-  : BaseSD(name)
+  : G4VSensitiveDetector(name)
 {
 }
 
@@ -32,7 +32,12 @@ G4bool KillBoxSD::ProcessHits(G4Step* step, G4TouchableHistory*) {
     return false;
   }
 
-  auto volume = pre->GetTouchableHandle()->GetVolume();
+  auto touchable = pre->GetTouchableHandle();
+  if (!touchable) {
+    return false;
+  }
+
+  auto volume = touchable->GetVolume();
   if (!volume) {
     return false;
   }
@@ -49,9 +54,6 @@ G4bool KillBoxSD::ProcessHits(G4Step* step, G4TouchableHistory*) {
       post->GetStepStatus() == fGeomBoundary &&
       pre->GetMomentumDirection().x() <= 0
     ) {
-      // auto info = ExtractStepInfo(step);
-      // PrintStepInfo(info);
-
       track->SetTrackStatus(fStopAndKill);
       return true;
     }
@@ -59,10 +61,7 @@ G4bool KillBoxSD::ProcessHits(G4Step* step, G4TouchableHistory*) {
     return false;
   }
 
-  // // Resto de caras de la KillBox: mata siempre al entrar.
-  // auto info = ExtractStepInfo(step);
-  // PrintStepInfo(info);
-
+  // Resto de caras de la KillBox: mata siempre al entrar.
   track->SetTrackStatus(fStopAndKill);
 
   return true;

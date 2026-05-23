@@ -1,0 +1,25 @@
+[Run]
+nEvents = 100000
+mode = "pythia-only"
+hepmcOutput = "results/realistic_100000ev_PYTHIA.hepmc"
+
+[Pythia]
+cmndFile = "config/cmndPythia/test.cmnd"
+
+[Pgun] 
+energy = 100.0
+pdg = 2212
+mass = 0.938272
+
+[Geant4]
+input = "results/test_PGUN.hepmc"
+output = "results/test_PARTICLEFLOW.0.hepmc"
+ui = false
+geometry = "SimpleWall"
+
+[Geant4.AngularFilter]
+enabled = true
+targetX = 29.74142
+targetY = -4.26804
+targetZ = 9.33062
+theta = 50.0
